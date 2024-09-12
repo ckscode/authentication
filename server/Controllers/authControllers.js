@@ -77,5 +77,26 @@ if(token){
 
 
 export const signin = async(req,res) =>{
+   try{
+       const {email,password} = req.body;
 
+       const user = await User.findOne({email});
+
+       if(!user){
+        return res.status(401),json({error:'User not found,please signup'})
+       }
+
+       if(!user.authentication(password)){
+        return res.status(401),json({error:'Email and Password do not match'})
+       }
+
+       const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
+
+       const {_id,name,role} = user;
+
+       return res.json({token:token,user:{_id,name,role}})
+
+   }catch(error){
+        return res.json({error:error.message})
+   }
 }
