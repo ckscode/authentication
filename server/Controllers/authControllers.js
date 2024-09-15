@@ -8,7 +8,7 @@ try{
 
     const userExist=await User.findOne({email})
            if(userExist){
-            return res.status(400).json({
+            return res.status(400).json({status:false,
                 error:'email is taken'
             })
            }
@@ -37,13 +37,13 @@ try{
     // const newUser = new User({ name, email, password });
 
     // await newUser.save()
-        res.json({
+       return res.json({status:true,
             message: 'Email has been sent to signup the user'
         });
 
      
 }catch(error){
-     res.json({error:error.message});
+    return res.json({error:error.message});
 }
    
 }
@@ -56,7 +56,6 @@ const {token} = req.body;
 if(token){
     jwt.verify(token,process.env.JWT_ACCOUNT_ACTIVATION,function(err,data){
         if(err){
-            console.log('jwt token expired',err);
             return res.status(401).json({
                 error:'Expired link.Signup'
             })
@@ -83,11 +82,11 @@ export const signin = async(req,res) =>{
        const user = await User.findOne({email});
 
        if(!user){
-        return res.status(401),json({error:'User not found,please signup'})
+        return res.status(401).json({error:'User not found,please signup'})
        }
 
        if(!user.authentication(password)){
-        return res.status(401),json({error:'Email and Password do not match'})
+        return res.status(401).json({error:'Email and Password do not match'})
        }
 
        const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});

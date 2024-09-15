@@ -12,7 +12,7 @@ export const userSignupValidator = [
 
 
 export const userSigninValidator = [
-  check("name").not().isEmpty().withMessage("name is required"),
+
 
   check("email").isEmail().withMessage("give a valid email"),
 
