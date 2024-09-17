@@ -1,3 +1,5 @@
+
+import { expressjwt }  from "express-jwt";
 import User from "../Models/user.js";
 import sendEmail from "../utils/sendEmail.js";
 import jwt from 'jsonwebtoken';
@@ -89,7 +91,7 @@ export const signin = async(req,res) =>{
         return res.status(401).json({error:'Email and Password do not match'})
        }
 
-       const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
+       const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'});
 
        const {_id,name,role} = user;
 
@@ -98,4 +100,31 @@ export const signin = async(req,res) =>{
    }catch(error){
         return res.json({error:error.message})
    }
+}
+
+
+export const requireSignin = expressjwt({
+    secret:process.env.JWT_SECRET,
+    algorithms: ['HS256'],
+})
+
+
+export const adminMiddleware = async(req,res,next) =>{
+    try{
+       const user = await User.findOne({_id:req.auth._id});
+       if(!user){
+            return res.status(404).json({
+                error:"User not found"
+            })
+       }
+
+       if(user.role !== "admin"){
+        return res.status(400).json({error:"Admin Resource.Access denied"})
+       }
+
+    }catch(error){
+        return res.json({error:error.message})
+    }
+
+    next()
 }
