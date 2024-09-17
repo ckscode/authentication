@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { authenticate, isAuth } from "../../Components/Helpers/Helpers";
 
 
 const Signin = () => {
     const [data,setData] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
+useEffect(()=>{
+  {isAuth().role==="subscriber"&&navigate('/private')}
+  {isAuth().role==="admin"&&navigate('/admin')}
+},[])
+
+   
     const handleChange = (e) =>{
         const {name,value} = e.target
          setData({...data,[name]:value})
@@ -18,12 +25,16 @@ const Signin = () => {
             e.preventDefault();
              await axios.post(`${process.env.REACT_APP_API_URL}/api/signin`,data).then(response => {
                 console.log('SIGNIN SUCCESS', response);
-                setData('');
-                toast.success(`Hey,${response.data.user.name} Welcome`);
-                navigate('/landing')
+                authenticate(response,()=>{
+                  setData('');
+                  toast.success(`Hey,${response.data?.user.name} Welcome`);
+                  {isAuth().role==="subscriber"&&navigate('/private')}
+                  {isAuth().role==="admin"&&navigate('/admin')}
+                })
+
             })
-            .catch(error => {
-                console.log('SIGNIN ERROR', error.response.data);
+            .catch((error) => {
+               console.log('SIGNIN ERROR', error);
                 setData({ ...data });
                 toast.error(error.response.data.error);
             });

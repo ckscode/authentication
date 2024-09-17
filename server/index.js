@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoutes from './Routes/auth.js';
+import userRoutes from './Routes/user.js'
 import morgan from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -26,6 +27,7 @@ app.use(express.json());
 
 
 app.use('/api',authRoutes);
+app.use('/api',userRoutes);
 
 app.listen(process.env.PORT,()=>{
 console.log('app is listening')

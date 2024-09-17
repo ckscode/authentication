@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
+import { isAuth } from "../../Components/Helpers/Helpers";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
     const [data,setData] = useState("");
+    const navigate = useNavigate();
+  
+    useEffect(()=>{
+      {isAuth().role==="subscriber"&&navigate('/private')}
+      {isAuth().role==="admin"&&navigate('/admin')}
+    },[])
 
     const handleChange = (e) =>{
         const {name,value} = e.target
@@ -17,6 +25,7 @@ const Signup = () => {
                 console.log('SIGNUP SUCCESS', response);
                 setData('');
                 toast.success(response.data.message);
+               
             })
             .catch(error => {
                 console.log('SIGNUP ERROR', error.response.data);
@@ -31,6 +40,7 @@ const Signup = () => {
    
 
     }
+ 
   return (
     <div>
         

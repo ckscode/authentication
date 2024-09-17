@@ -8,6 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Signin from './Pages/Signin/Signin';
 import Activate from './Pages/ActivateAccount/Activate';
 import Private from './Pages/Landing/Private';
+import PrivateRoute from './Components/Auth/privateRoute';
+import AdminRoute from './Components/Auth/AdminRoute';
+import Admin from './Pages/Landing/Admin';
 
 function App() {
  
@@ -18,16 +21,25 @@ function App() {
     <ToastContainer/>
    
       <Routes>
-        <Route path='/' element={
-           <Layout><Home/></Layout>}/>
-        <Route path='/signup' element={
-          <Layout><Signup/></Layout>}/>
+        <Route path='/' element={<Layout/>}>
+        <Route index exact element={
+          <Home/>}/>
+           <Route path='/signup' element={
+          <Signup/>}/>
+          
           <Route path='/signin' element={
-          <Layout><Signin/></Layout>}/>
+          <Signin/>}/>
             <Route path='/auth/activate/:token' element={
-          <Layout><Activate/></Layout>}/>
-            <Route path='/landing' element={
-          <Layout><Private/></Layout>}/>
+          <Activate/>}/>
+            <Route path='/private' element={
+             <PrivateRoute>
+              <Private/>
+             </PrivateRoute>}/>
+             <Route path='/admin' element={
+             <AdminRoute>
+              <Admin/>
+             </AdminRoute>}/>    
+        </Route>
       </Routes>
     </BrowserRouter>
     </>
