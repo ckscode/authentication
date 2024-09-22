@@ -13,7 +13,7 @@ const Google = ({googleSignin}) => {
             console.log('GOOGLE SIGNIN SUCCESS',response)
             googleSignin(response)
           }).catch((error)=>{
-            console.log('GOOGLE SIGNIN SUCCESS',error)
+            console.log('GOOGLE SIGNIN ERROR',error)
           })
         }}
         onError={() => {

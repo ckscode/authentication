@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { authenticate, isAuth } from "../../Components/Helpers/Helpers";
 import Google from "../../Components/Auth/Google";
+import Facebook from "../../Components/Auth/Facebook";
 
 
 const Signin = () => {
@@ -21,7 +22,7 @@ useEffect(()=>{
          setData({...data,[name]:value})
     }
 
-    const googleSignin = (response) =>{
+    const redirectUser = (response) =>{
       authenticate(response,()=>{
         toast.success(`Hey,${response.data?.user.name} Welcome`);
         {isAuth().role==="subscriber"&&navigate('/private')}
@@ -98,7 +99,9 @@ useEffect(()=>{
         <Link className="text-decoration-none" to='/auth/password/forgot'>Forgot Password?</Link>
         </div>
       </form>
-  <Google googleSignin={googleSignin}/>
+  <Google googleSignin={redirectUser}/>
+  <br/>
+  <Facebook facebookSignin={redirectUser}/>
     </div>
   );
 };

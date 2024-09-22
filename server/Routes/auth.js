@@ -1,5 +1,5 @@
 import express from "express";
-import { accountActivation, forgotPassword, googleLogin, resetPassword, signin, signup } from "../Controllers/authControllers.js";
+import { accountActivation, facebookLogin, forgotPassword, googleLogin, resetPassword, signin, signup } from "../Controllers/authControllers.js";
 import { userSigninValidator, userSignupValidator,forgotPasswordValidator,resetPasswordValidator } from "../Validators/auth.js";
 import { runValidation } from "../Validators/index.js";
 
@@ -15,5 +15,6 @@ Router.put('/reset-password',resetPasswordValidator,runValidation,resetPassword)
 
 //google and facebook
 Router.post('/google-login',googleLogin)
+Router.post('/facebook-login',facebookLogin)
 
 export default Router;

@@ -15,7 +15,7 @@ const app = express();
 //app middlewares
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({
-        origin:'http://localhost:5173'
+        origin:'https://localhost:5173'
     }))
 }
 app.use(morgan('dev'));

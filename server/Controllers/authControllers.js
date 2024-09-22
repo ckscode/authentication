@@ -7,6 +7,7 @@ import _ from "lodash";
 import MailMessage from "nodemailer/lib/mailer/mail-message.js";
 import { OAuth2Client } from "google-auth-library";
 import { response } from "express";
+import fetch from "node-fetch";
 
 export const signup = async(req,res)=>{
 try{
@@ -274,4 +275,9 @@ export const googleLogin = async(req,res) =>{
         return res.json({error:error.message})
     }
    
+}
+
+
+export const facebookLogin = (req,res) =>{
+
 }
