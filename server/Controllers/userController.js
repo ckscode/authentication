@@ -29,21 +29,31 @@ export const update = async(req,res) =>{
         if(!user){
             return res.status(404).json({message:'User Not found'});
         }
+
+        if (!name) {
+            return res.status(400).json({
+                error: 'Name is required'
+            });
+        } else {
+            user.name = name;
+        }
         
         if(password){
             if(password.length<6){
                 return res.status(400).json({error:"Password must be more than 6 characters"})
+            }else {
+                user.password = password;
             }
            
         }
 
-       user.name = name;
-       user.password = password;
+   
        const UpdatedUser = await user.save();
        
        if(UpdatedUser){
         UpdatedUser.hashed_password = undefined;
-        UpdatedUser.salt = undefined
+        UpdatedUser.salt = undefined;
+        UpdatedUser.resetPasswordLink = undefined;
         return res.json({message:"User updated successfully",data:UpdatedUser})
        }
        

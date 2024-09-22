@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
-import { getCookie, isAuth, signOut } from "../../Components/Helpers/Helpers";
+import { getCookie, isAuth, signOut, updateUser } from "../../Components/Helpers/Helpers";
 import { useNavigate } from "react-router-dom";
 
 
@@ -54,14 +54,19 @@ const Private = () => {
     const handleSubmit = async(e) =>{
         try{
             e.preventDefault();
-             await axios.put(`${process.env.REACT_APP_API_URL}/api/user/update`,data).then(response => {
-                console.log('SIGNUP SUCCESS', response);
-                setData('');
-                toast.success(response.data.message);
+             await axios.put(`${process.env.REACT_APP_API_URL}/api/user/update`,data,
+              {headers:{
+                authorization: `Bearer ${token}`
+            }}
+             ).then(response => {
+                console.log('PRIVATE PROFILE RESPONSE', response);
+                 updateUser(response,()=>{
+                  toast.success("profile updated successfully!");
+                 })
                
             })
             .catch(error => {
-                console.log('SIGNUP ERROR', error.response.data);
+                console.log('PRIVATE PROFILE ERROR', error.response.data);
                 setData({ ...data, buttonText: 'Submit' });
                 toast.error(error.response.data.error);
             });
@@ -92,7 +97,7 @@ const Private = () => {
             id="exampleInputRole"
             onChange={handleChange}
             value={data?.role||""}
-     
+            disabled
           />
         </div>
       <div className="mb-3">
@@ -121,7 +126,7 @@ const Private = () => {
             aria-describedby="emailHelp"
             onChange={handleChange}
             value={data?.email||""}
-          
+            disabled
           />
         </div>
         <div className="mb-3">
@@ -139,7 +144,7 @@ const Private = () => {
           />
         </div>
    
-        <button  className="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
         </div>

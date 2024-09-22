@@ -11,6 +11,8 @@ import Private from './Pages/Landing/Private';
 import PrivateRoute from './Components/Auth/privateRoute';
 import AdminRoute from './Components/Auth/AdminRoute';
 import Admin from './Pages/Landing/Admin';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword/ResetPassword';
 
 function App() {
  
@@ -31,6 +33,8 @@ function App() {
           <Signin/>}/>
             <Route path='/auth/activate/:token' element={
           <Activate/>}/>
+          <Route path='/auth/password/forgot' element={<ForgotPassword/>}/>
+          <Route path='/auth/password/reset/:id' element={<ResetPassword/>}/>
             <Route path='/private' element={
              <PrivateRoute>
               <Private/>
