@@ -182,7 +182,7 @@ export const forgotPassword = async (req, res) => {
 export const resetPassword = async (req, res) => {
   try {
     const { newPassword, resetPasswordLink } = req.body;
-    console.log("here");
+
     if (resetPasswordLink) {
       jwt.verify(
         resetPasswordLink,

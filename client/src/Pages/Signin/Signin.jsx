@@ -33,7 +33,6 @@ useEffect(()=>{
     const handleSubmit = async(e) =>{
         try{
             e.preventDefault();
-            console.log(data)
              await axios.post(`${process.env.REACT_APP_API_URL}/api/signin`,data).then(response => {
                 console.log('SIGNIN SUCCESS', response);
                 authenticate(response,()=>{
