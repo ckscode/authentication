@@ -9,15 +9,5 @@ export default defineConfig(({ mode }) =>{
       'process.env': env
     },
   plugins: [react()],
-  server:{
-    https:{
-
-      key:fs.readFileSync("./localhost.key"),
-      cert:fs.readFileSync("./localhost.crt"),
-
-    },
-
-  },
-
  }
 })
