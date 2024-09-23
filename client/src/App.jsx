@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Signin from './Pages/Signin/Signin';
 import Activate from './Pages/ActivateAccount/Activate';
 import Private from './Pages/Landing/Private';
-import PrivateRoute from './Components/Auth/privateRoute';
+import PrivateRoute from './Components/Auth/PrivateRoute';
 import AdminRoute from './Components/Auth/AdminRoute';
 import Admin from './Pages/Landing/Admin';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
