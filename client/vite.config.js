@@ -15,7 +15,9 @@ export default defineConfig(({ mode }) =>{
       key:fs.readFileSync("./localhost.key"),
       cert:fs.readFileSync("./localhost.crt"),
 
-    }
-  }
+    },
+
+  },
+
  }
 })

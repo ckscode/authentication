@@ -97,11 +97,17 @@ useEffect(()=>{
         </button>
         <br/>
         <Link className="text-decoration-none" to='/auth/password/forgot'>Forgot Password?</Link>
+        <hr></hr>
         </div>
       </form>
-  <Google googleSignin={redirectUser}/>
+      
+      <div>
+        
+      <Google googleSignin={redirectUser}/>
   <br/>
   <Facebook facebookSignin={redirectUser}/>
+      </div>
+
     </div>
   );
 };

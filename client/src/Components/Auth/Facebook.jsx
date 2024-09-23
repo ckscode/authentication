@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { authenticate, isAuth } from "../Helpers/Helpers";
-import FacebookLogin from "react-facebook-login";
-
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import './auth.css'
 const Facebook = ({ facebookSignin }) => {
   // const responseFacebook = (response) => {
   //   console.log(response);
@@ -20,7 +20,7 @@ const Facebook = ({ facebookSignin }) => {
   //     });
   // };
   return (
-    <div className="col-sm-6 col-md-3 m-auto mt-3 p-0">
+    <div className="col-sm-6 col-md-3 m-auto  p-0">
       <FacebookLogin
         appId={`${process.env.REACT_APP_FACEBOOK_APP_ID}`}
         autoLoad={false}
@@ -39,25 +39,13 @@ const Facebook = ({ facebookSignin }) => {
               console.log("FACEBOOK SIGNIN ERROR", error);
             })}}
         render={(renderProps) => (
-          <button onClick={renderProps.onClick}>
-            This is my custom FB button
+          <button className="my-facebook-button-class d-flex align-items-center"  onClick={renderProps.onClick}>
+        <i style={{fontSize:'20px'}} className="fa-brands fa-facebook"></i>
+         &nbsp;Facebook Login
           </button>
         )}
       />
-      {/* <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          axios.post(`${process.env.REACT_APP_API_URL}/api/google-login`,{data:credentialResponse.credential})
-          .then(response=>{
-            console.log('GOOGLE SIGNIN SUCCESS',response)
-            googleSignin(response)
-          }).catch((error)=>{
-            console.log('GOOGLE SIGNIN SUCCESS',error)
-          })
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      /> */}
+     
     </div>
   );
 };
