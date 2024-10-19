@@ -12,7 +12,7 @@ const Signin = () => {
     const navigate = useNavigate();
 
 useEffect(()=>{
-  {isAuth().role==="subscriber"&&navigate('/private')}
+  {isAuth().role==="subscriber"&&navigate('/order')}
   {isAuth().role==="admin"&&navigate('/admin')}
 },[])
 
@@ -25,7 +25,7 @@ useEffect(()=>{
     const redirectUser = (response) =>{
       authenticate(response,()=>{
         toast.success(`Hey,${response.data?.user.name} Welcome`);
-        {isAuth().role==="subscriber"&&navigate('/private')}
+        {isAuth().role==="subscriber"&&navigate('/order')}
         {isAuth().role==="admin"&&navigate('/admin')}
       })
     }
@@ -38,7 +38,7 @@ useEffect(()=>{
                 authenticate(response,()=>{
                   setData('');
                   toast.success(`Hey,${response.data?.user.name} Welcome`);
-                  {isAuth().role==="subscriber"&&navigate('/private')}
+                  {isAuth().role==="subscriber"&&navigate('/order')}
                   {isAuth().role==="admin"&&navigate('/admin')}
                 })
 

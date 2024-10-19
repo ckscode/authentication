@@ -13,6 +13,7 @@ import AdminRoute from './Components/Auth/AdminRoute';
 import Admin from './Pages/Landing/Admin';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
+import Order from './Pages/Order/Order';
 
 function App() {
  
@@ -38,7 +39,13 @@ function App() {
             <Route path='/private' element={
              <PrivateRoute>
               <Private/>
-             </PrivateRoute>}/>
+             </PrivateRoute>
+            }/>
+                <Route path='/order' element={
+             <PrivateRoute>
+              <Order/>
+             </PrivateRoute>
+            }/>
              <Route path='/admin' element={
              <AdminRoute>
               <Admin/>

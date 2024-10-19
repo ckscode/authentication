@@ -9,7 +9,7 @@ const Signup = () => {
     const navigate = useNavigate();
   
     useEffect(()=>{
-      {isAuth().role==="subscriber"&&navigate('/private')}
+      {isAuth().role==="subscriber"&&navigate('/order')}
       {isAuth().role==="admin"&&navigate('/admin')}
     },[])
 

@@ -5,24 +5,26 @@ import dotenv from 'dotenv'
 dotenv.config();
 const sendEmail = async(req,res,emailData)=>{
     const transporter = nodemailer.createTransport({
-        service:'outlook',
-        host: process.env.EMAIL_HOST,
-        port: 587,
-        secure: false, // true for port 465, false for other ports
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
+      secure:true,
+      host:'smtp.gmail.com',
+      port: 465,
+      auth:{
+          user:process.env.EMAIL_USER,
+          pass:process.env.EMAIL_PASS
+      }
       });
 
           //send email
-          transporter.sendMail(emailData,async function(err,info){
-            try{
-             console.log(info)
-            }catch{
-             console.log(err)
+          transporter.sendMail(emailData, function (err, info) {
+           
+            if (err) {
+              console.error("Error occurred: ", err.response);
+              return res.status(500).send({ message: "Failed to send email", error: err });
+            } else {
+              console.log("Email sent: ", info.response);
+              return res.status(200).send({ message: "Email sent successfully", info: info });
             }
-            })
+          });
 }
 
 

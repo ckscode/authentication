@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { toast } from "react-toastify";
 import { getCookie, isAuth, signOut, updateUser } from "../../Components/Helpers/Helpers";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Private = () => {
@@ -143,10 +143,13 @@ const Private = () => {
          
           />
         </div>
-   
-        <button type="submit" className="btn btn-primary">
+       <div className="w-100 d-flex align-items-center">
+       <button type="submit" className="btn btn-primary">
           Submit
         </button>
+       <Link className="text-decoration-none ms-auto" to='/order'>Back to order</Link>
+       </div>
+     
         </div>
       </form>
     </div>

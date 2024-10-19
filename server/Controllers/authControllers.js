@@ -38,9 +38,7 @@ export const signup = async (req, res) => {
 
     sendEmail(req, res, emailData);
 
-    // const newUser = new User({ name, email, password });
 
-    // await newUser.save()
     return res.json({
       status: true,
       message: "Email has been sent to signup the user",
