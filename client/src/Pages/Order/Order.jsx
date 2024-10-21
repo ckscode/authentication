@@ -80,7 +80,7 @@ const Order = () => {
                   );
                   const jsonRes = await validateRes.json();
                   console.log(jsonRes);
-                  alert(jsonRes.msg)
+                  alert(`payment status:${jsonRes.msg}`)
                 },
                 prefill: {
                   //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
