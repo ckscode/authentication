@@ -56,7 +56,7 @@ const Order = () => {
               const order = await response.json();
           
               const options = {
-                key: process.env.REACT_APP_RAZOR_KEY, // Enter the Key ID generated from the Dashboard
+                key: process.env.REACT_APP_RAZOR_ID, // Enter the Key ID generated from the Dashboard
                 amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 currency,
                 name: "Acme Corp", //your business name
