@@ -21,7 +21,7 @@ const Order = () => {
              {headers:{
                  authorization: `Bearer ${token}`
              }}).then(response=>{ setData(response.data.data)
-                 console.log('private profile update ',response)
+                
              }).catch(error=>
                  {
                      console.log('private profile update error',error.response.data.error)
@@ -54,10 +54,9 @@ const Order = () => {
                 },
               });
               const order = await response.json();
-              console.log(order);
           
               const options = {
-                key: "rzp_test_MeGwOKOJo0I6Kd", // Enter the Key ID generated from the Dashboard
+                key: process.env.REACT_APP_RAZOR_KEY, // Enter the Key ID generated from the Dashboard
                 amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 currency,
                 name: "Acme Corp", //your business name
@@ -81,13 +80,14 @@ const Order = () => {
                   );
                   const jsonRes = await validateRes.json();
                   console.log(jsonRes);
+                  alert(jsonRes.msg)
                 },
                 prefill: {
                   //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
                   name: data.name, //your customer's name
                   email: data.email,
                 },
-                method: 'upi',
+                method: '',
                 notes: {
                   address: "Razorpay Corporate Office",
                 },

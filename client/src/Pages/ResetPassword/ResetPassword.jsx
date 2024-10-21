@@ -40,18 +40,7 @@ setData({resetPasswordLink})
             }else{
                 toast.error('New password and Confirm password doest not match'); 
             }
-           
-            // await axios.put(`${process.env.REACT_APP_API_URL}/api/reset-password`,{data,resetPasswordLink}).then(response=>{
-            //     console.log("RESET PASSWORD RESPONSE",response.data);
-            //     setData({...data})
-            //     toast.success(response.data.message)
-            // }).catch(error=>{
-            //     console.log('RESET PASSWORD ERROR', error);
-            //     setData({...data});
-            //     toast.error(error.response.data.error);
-            // }
-            // )
-           
+              
          
         }catch(error){
             console.log(error)

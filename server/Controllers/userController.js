@@ -1,5 +1,6 @@
 import Razorpay from "razorpay";
 import User from "../Models/user.js";
+import crypto from "crypto"
 
 export const read = async(req,res) =>{
     try{
@@ -92,7 +93,7 @@ export const orderValidate = async (req, res) => {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
       req.body;
   
-    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
+    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET);
     //order_id + "|" + razorpay_payment_id
     sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const digest = sha.digest("hex");
